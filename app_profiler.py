@@ -19,7 +19,7 @@ st.write(f"**Field of Research:** {field}")
 st.write(f"**Institution:** {institution}")
 
 st.image(
-    "C:/Users/Lucky Manenzhe/Downloads/Screenshot_20260131_213121_Google.jpg",
+    "C:/Users/Lucky Manenzhe/Downloads/Streamlit_2026/Screenshot_20260131_213121_Google.jpg",
     caption="Business Insurance Platform for SMEs"
 )
 
