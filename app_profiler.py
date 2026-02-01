@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 #import io
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 # Title of the app
 st.title("Optimal Investment And Reinsurance Policies In Insurance Markets Under The Effects Of Inside Information")
 
@@ -187,3 +187,4 @@ st.pyplot(fig3)
 st.header("Contact Information")
 email = "manenzhelucky2@gmail.com"
 st.write(f"You can reach {name} at {email}.")
+
