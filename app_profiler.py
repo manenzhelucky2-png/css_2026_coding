@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import io
+#import io
 import matplotlib.pyplot as plt
 # Title of the app
 st.title("Optimal Investment And Reinsurance Policies In Insurance Markets Under The Effects Of Inside Information")
@@ -19,7 +19,7 @@ st.write(f"**Institution:** {institution}")
 
 st.image(
     "C:/Users/Lucky Manenzhe/Downloads/Screenshot_20260131_213121_Google.jpg",
-    caption="Nature (Pixabay)"
+    caption="Business Insurance Platform for SMEs"
 )
 
 # Add a section for publications
