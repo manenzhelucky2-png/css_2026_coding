@@ -1,8 +1,8 @@
 import streamlit as st
 import numpy as np
-#import io
 import pandas as pd
-#from PyPDF2 import PdfReader
+import io
+from PyPDF2 import PdfReader
 
 # Title of the app
 st.title("Optimal Investment And Reinsurance Policies In Insurance Markets Under The Effects Of Inside Information")
@@ -18,10 +18,19 @@ st.write(f"**Name:** {name}")
 st.write(f"**Field of Research:** {field}")
 st.write(f"**Institution:** {institution}")
 
-st.image(
-    "Image/WhatsApp Image 2026-01-31 at 21.31.23.jpeg",
-    caption="Business Insurance Platform for SMEs"
-)
+# Image - consider using a relative path or uploading
+# Option 1: Keep as is (but may not work in deployment)
+try:
+    st.image(
+        "C:/Users/Lucky Manenzhe/Downloads/Streamlit_2026/Screenshot_20260131_213121_Google.jpg",
+        caption="Business Insurance Platform for SMEs"
+    )
+except FileNotFoundError:
+    st.warning("Image file not found. Please check the file path.")
+    # Option: Add file uploader for image
+    # uploaded_image = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
+    # if uploaded_image:
+    #     st.image(uploaded_image, caption="Business Insurance Platform for SMEs")
 
 # Add a section for publications
 st.header("Publications")
@@ -30,28 +39,31 @@ st.header("Publications")
 uploaded_file = st.file_uploader("Upload a PDF of Publications", type="pdf")
 
 if uploaded_file:
-    pdf_reader = PdfReader(io.BytesIO(uploaded_file.read()))
-    num_pages = len(pdf_reader.pages)
-    
-    pdf_text = ""
-    for page_num in range(num_pages):
-        page = pdf_reader.pages[page_num]
-        pdf_text += page.extract_text() + "\n\n"
-    
-    st.text_area("PDF Content", pdf_text, height=400)
-    st.write(f"Total pages: {num_pages}")
-    st.write(f"File name: {uploaded_file.name}")
-    
-    keyword = st.text_input("Search in PDF", "")
-    if keyword:
-        if keyword.lower() in pdf_text.lower():
-            st.success(f"Keyword '{keyword}' found in the PDF.")
-            lines = pdf_text.split("\n")
-            for line in lines:
-                if keyword.lower() in line.lower():
-                    st.write(line)
-        else:
-            st.warning(f"Keyword '{keyword}' not found.")
+    try:
+        pdf_reader = PdfReader(io.BytesIO(uploaded_file.read()))
+        num_pages = len(pdf_reader.pages)
+        
+        pdf_text = ""
+        for page_num in range(num_pages):
+            page = pdf_reader.pages[page_num]
+            pdf_text += page.extract_text() + "\n\n"
+        
+        st.text_area("PDF Content", pdf_text, height=400)
+        st.write(f"Total pages: {num_pages}")
+        st.write(f"File name: {uploaded_file.name}")
+        
+        keyword = st.text_input("Search in PDF", "")
+        if keyword:
+            if keyword.lower() in pdf_text.lower():
+                st.success(f"Keyword '{keyword}' found in the PDF.")
+                lines = pdf_text.split("\n")
+                for line in lines:
+                    if keyword.lower() in line.lower():
+                        st.write(line)
+            else:
+                st.warning(f"Keyword '{keyword}' not found.")
+    except Exception as e:
+        st.error(f"Error reading PDF: {e}")
 else:
     st.write("Please upload a PDF file to view its content.")
 
@@ -71,6 +83,25 @@ research_data = pd.DataFrame({
 st.subheader("Optimal Investment and Reinsurance Strategies Over Time")
 st.write("**Table: Effect of Risk Aversion (γ) on Optimal Strategies**")
 st.dataframe(research_data)
+
+# Add charts for better visualization
+st.subheader("Visualization of Strategies")
+
+# Investment chart
+st.write("**Investment Proportions Over Time**")
+investment_data = research_data[["Time t", 
+                                 "Optimal Investment Proportion (γ = 0.5)",
+                                 "Optimal Investment Proportion (γ = 0.55)",
+                                 "Optimal Investment Proportion (γ = 0.6)"]]
+st.line_chart(investment_data.set_index("Time t"))
+
+# Reinsurance chart
+st.write("**Reinsurance Proportions Over Time**")
+reinsurance_data = research_data[["Time t",
+                                  "Optimal Reinsurance Proportion (γ = 0.5)",
+                                  "Optimal Reinsurance Proportion (γ = 0.55)",
+                                  "Optimal Reinsurance Proportion (γ = 0.6)"]]
+st.line_chart(reinsurance_data.set_index("Time t"))
 
 # Add analysis section
 st.subheader("Data Analysis")
