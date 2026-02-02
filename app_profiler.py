@@ -19,7 +19,7 @@ st.write(f"**Field of Research:** {field}")
 st.write(f"**Institution:** {institution}")
 
 st.image(
-    "C:/Users/Lucky Manenzhe/Downloads/Streamlit_2026/Screenshot_20260131_213121_Google.jpg",
+    "Image/WhatsApp Image 2026-01-31 at 21.31.23.jpeg",
     caption="Business Insurance Platform for SMEs"
 )
 
@@ -96,3 +96,4 @@ st.write("""
 st.header("Contact Information")
 email = "manenzhelucky2@gmail.com"
 st.write(f"You can reach {name} at {email}.")
+
