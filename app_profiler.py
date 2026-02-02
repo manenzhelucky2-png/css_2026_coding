@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import io
-from PyPDF2 import PdfReader
+#from PyPDF2 import PdfReader
 
 # Title of the app
 st.title("Optimal Investment And Reinsurance Policies In Insurance Markets Under The Effects Of Inside Information")
@@ -127,4 +127,5 @@ st.write("""
 st.header("Contact Information")
 email = "manenzhelucky2@gmail.com"
 st.write(f"You can reach {name} at {email}.")
+
 
